@@ -177,6 +177,7 @@ namespace ekranska_forma
             this.dodajButton.TabIndex = 13;
             this.dodajButton.Text = "Dodaj";
             this.dodajButton.UseVisualStyleBackColor = true;
+            this.dodajButton.Click += new System.EventHandler(this.dodajButton_Click);
             // 
             // obrisiButton
             // 

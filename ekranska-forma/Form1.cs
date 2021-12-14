@@ -60,6 +60,23 @@ namespace ekranska_forma
             connection.Close();
         }
 
+        private void AddData(SqlRow data)
+        {
+            string query = $"insert into Smer(naziv, trajanje, maxUcenika, prijemniIspit) values('{data.naziv}', {data.trajanje}, {data.maxUcenika}, '{data.prijemniIspit}');";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+
+            cmd.ExecuteNonQuery();
+
+            ReadAllData();
+            DisplayData();
+
+            connection.Close();
+        }
+
         private void DisplayData()
         {
             if (data.Count == 0)
@@ -124,6 +141,31 @@ namespace ekranska_forma
         {
             currentDataIdx = data.Count - 1;
             DisplayData();
+        }
+
+        private void dodajButton_Click(object sender, EventArgs e)
+        {
+            var currentData = new SqlRow();
+
+            if (nameTb.Text.Length == 0 || prijemniIspitTb.Text.Length == 0)
+            {
+                MessageBox.Show("Sva polja moraju biti popunjena");
+                return;
+            }
+
+            currentData.naziv = nameTb.Text;
+            try
+            {
+                currentData.trajanje = int.Parse(trajanjeTb.Text);
+                currentData.maxUcenika = int.Parse(maxUcenikaTb.Text);
+            } catch (Exception exc)
+            {
+                MessageBox.Show("Trajanje i Max Ucenika moraju biti validni brojevi");
+                return;
+            }
+            currentData.prijemniIspit = prijemniIspitTb.Text;
+
+            AddData(currentData);
         }
     }
 }
