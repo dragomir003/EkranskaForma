@@ -126,6 +126,7 @@ namespace ekranska_forma
             this.gotoStartButton.TabIndex = 8;
             this.gotoStartButton.Text = "<<";
             this.gotoStartButton.UseVisualStyleBackColor = true;
+            this.gotoStartButton.Click += new System.EventHandler(this.gotoStartButton_Click);
             // 
             // gotoPrevButton
             // 
@@ -135,6 +136,7 @@ namespace ekranska_forma
             this.gotoPrevButton.TabIndex = 9;
             this.gotoPrevButton.Text = "<";
             this.gotoPrevButton.UseVisualStyleBackColor = true;
+            this.gotoPrevButton.Click += new System.EventHandler(this.gotoPrevButton_Click);
             // 
             // gotoNextButton
             // 
@@ -144,6 +146,7 @@ namespace ekranska_forma
             this.gotoNextButton.TabIndex = 10;
             this.gotoNextButton.Text = ">";
             this.gotoNextButton.UseVisualStyleBackColor = true;
+            this.gotoNextButton.Click += new System.EventHandler(this.gotoNextButton_Click);
             // 
             // gotoEndButton
             // 
@@ -153,6 +156,7 @@ namespace ekranska_forma
             this.gotoEndButton.TabIndex = 11;
             this.gotoEndButton.Text = ">>";
             this.gotoEndButton.UseVisualStyleBackColor = true;
+            this.gotoEndButton.Click += new System.EventHandler(this.gotoEndButton_Click);
             // 
             // izmeniButton
             // 
