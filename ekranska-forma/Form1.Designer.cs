@@ -167,6 +167,7 @@ namespace ekranska_forma
             this.izmeniButton.TabIndex = 12;
             this.izmeniButton.Text = "Izmeni";
             this.izmeniButton.UseVisualStyleBackColor = true;
+            this.izmeniButton.Click += new System.EventHandler(this.izmeniButton_Click);
             // 
             // dodajButton
             // 
@@ -188,6 +189,7 @@ namespace ekranska_forma
             this.obrisiButton.TabIndex = 14;
             this.obrisiButton.Text = "Obrisi";
             this.obrisiButton.UseVisualStyleBackColor = true;
+            this.obrisiButton.Click += new System.EventHandler(this.obrisiButton_Click);
             // 
             // Form1
             // 

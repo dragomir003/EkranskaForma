@@ -60,9 +60,9 @@ namespace ekranska_forma
             connection.Close();
         }
 
-        private void AddData(SqlRow data)
+        private void AddData(SqlRow row)
         {
-            string query = $"insert into Smer(naziv, trajanje, maxUcenika, prijemniIspit) values('{data.naziv}', {data.trajanje}, {data.maxUcenika}, '{data.prijemniIspit}');";
+            string query = $"insert into Smer(naziv, trajanje, maxUcenika, prijemniIspit) values('{row.naziv}', {row.trajanje}, {row.maxUcenika}, '{row.prijemniIspit}');";
 
             SqlCommand cmd = new SqlCommand(query, connection);
 
@@ -70,6 +70,42 @@ namespace ekranska_forma
                 connection.Open();
 
             cmd.ExecuteNonQuery();
+
+            ReadAllData();
+            DisplayData();
+
+            connection.Close();
+        }
+
+        private void UpdateData(SqlRow row)
+        {
+            string query = $"update Smer set naziv = '{row.naziv}', trajanje = {row.trajanje}, maxUcenika = {row.maxUcenika}, prijemniIspit =  '{row.prijemniIspit}' where id = {row.id};";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+
+            cmd.ExecuteNonQuery();
+
+            ReadAllData();
+            DisplayData();
+
+            connection.Close();
+        }
+
+        private void DeleteData(int id)
+        {
+            string query = $"delete from Smer where id = {id};";
+
+            SqlCommand cmd = new SqlCommand(query, connection);
+
+            if (connection.State != ConnectionState.Open)
+                connection.Open();
+
+            cmd.ExecuteNonQuery();
+
+            currentDataIdx = Math.Max(currentDataIdx - 1, 0);
 
             ReadAllData();
             DisplayData();
@@ -166,6 +202,52 @@ namespace ekranska_forma
             currentData.prijemniIspit = prijemniIspitTb.Text;
 
             AddData(currentData);
+        }
+
+        private void izmeniButton_Click(object sender, EventArgs e)
+        {
+            if (data.Count == 0)
+            {
+                MessageBox.Show("Ne postoje podaci koji se mogu izmeniti");
+                return;
+            }
+
+            var currentData = new SqlRow();
+
+            if (nameTb.Text.Length == 0 || prijemniIspitTb.Text.Length == 0)
+            {
+                MessageBox.Show("Sva polja moraju biti popunjena");
+                return;
+            }
+
+            currentData.naziv = nameTb.Text;
+            try
+            {
+                currentData.trajanje = int.Parse(trajanjeTb.Text);
+                currentData.maxUcenika = int.Parse(maxUcenikaTb.Text);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show("Trajanje i Max Ucenika moraju biti validni brojevi");
+                return;
+            }
+            currentData.prijemniIspit = prijemniIspitTb.Text;
+
+            currentData.id = data[currentDataIdx].id;
+
+            UpdateData(currentData);
+        }
+
+        private void obrisiButton_Click(object sender, EventArgs e)
+        {
+            if (data.Count == 0)
+            {
+                MessageBox.Show("Ne postoje podaci koji se mogu obrisati");
+                return;
+            }
+
+            DeleteData(data[currentDataIdx].id);
+
         }
     }
 }
