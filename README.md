@@ -6,4 +6,4 @@ sa Microsoft SQL Server-om.
 
 # Status
 
-Projekat se jos razvija ali je link poslat da ne bih zaboravio kasnije
+Projekat je zavrsen osim ako ne postoje neke primedbe.
